@@ -30,10 +30,10 @@ MANUAL
         list irregular processes for investigation, and display blacklisted processes.
 
     OPTIONS
-        1. Stop all and add to blacklist
-        2. Kill process if all entries listed
-        3. List irregular processes for investigation
-        4. Display blacklisted processes
+        1) Stop all and add to blacklist
+        2) Kill process if all entries listed
+        3) List irregular processes for investigation
+        4) Display blacklisted processes
 
     REPORTING BUGS
         Report bugs to the GitHub Issues page at <https://github.com/skunkworksza/microsoft/issues>.
@@ -45,28 +45,70 @@ MANUAL
         GitHub Repository: <https://github.com/skunkworksza/microsoft/tree/main/.ps1/ProcessGuardian>
 #>
 
-# PowerShell script to manage remote access processes
+# Function Definitions
 
-# [Functions: StopAndBlacklistProcesses, KillProcesses, ListIrregularProcesses, DisplayBlacklistedProcesses]
+function StopAndBlacklistProcesses {
+    param([string[]]$processNames)
+    foreach ($processName in $processNames) {
+        Get-Process $processName -ErrorAction SilentlyContinue | Stop-Process -Force
+        Add-Content -Path "C:\blacklist.txt" -Value $processName
+    }
+    Write-Host "Specified processes stopped and added to blacklist."
+}
+
+function KillProcesses {
+    param([string[]]$processNames)
+    foreach ($processName in $processNames) {
+        Get-Process $processName -ErrorAction SilentlyContinue | Stop-Process -Force
+    }
+    Write-Host "Specified processes have been killed."
+}
+
+function ListIrregularProcesses {
+    $cpuThreshold = 10 # percent
+    $memoryThreshold = 100MB # bytes
+    $processes = Get-Process | Where-Object { $_.CPU -gt $cpuThreshold -or $_.WS -gt $memoryThreshold }
+
+    if ($processes) {
+        Write-Host "Irregular processes found:"
+        $processes | Format-Table Name, CPU, WS, ID -AutoSize
+    } else {
+        Write-Host "No irregular processes found."
+    }
+}
+
+function DisplayBlacklistedProcesses {
+    $blacklistPath = "C:\blacklist.txt"
+    if (Test-Path $blacklistPath) {
+        Write-Host "Blacklisted processes:"
+        Get-Content $blacklistPath
+    } else {
+        Write-Host "No blacklist file found."
+    }
+}
 
 # Main script execution
 try {
     # Display script options to the user
     Write-Host "Welcome to ProcessGuardian. Please select an option:"
-    Write-Host "1. Stop all and add to blacklist"
-    Write-Host "2. Kill process if all entries listed"
-    Write-Host "3. List irregular processes for investigation"
-    Write-Host "4. Display blacklisted processes"
+    Write-Host "1) Stop all and add to blacklist"
+    Write-Host "2) Kill process if all entries listed"
+    Write-Host "3) List irregular processes for investigation"
+    Write-Host "4) Display blacklisted processes"
 
     # Read user choice
-    $userChoice = Read-Host "Enter your choice"
+    $userChoice = Read-Host "Enter your choice (1-4)"
 
     # Execute the choice
     switch ($userChoice) {
         "1" {
+            # Define your criteria for selecting all processes to be stopped and blacklisted
+            # Example: $allProcesses = @("ProcessName1", "ProcessName2")
             StopAndBlacklistProcesses $allProcesses
         }
         "2" {
+            # Define your criteria for selecting all processes to be killed
+            # Example: $allProcesses = @("ProcessName1", "ProcessName2")
             KillProcesses $allProcesses
         }
         "3" {
@@ -76,13 +118,9 @@ try {
             DisplayBlacklistedProcesses
         }
         default {
-            Write-Host "Invalid choice selected."
+            Write-Host "Invalid choice selected. Please enter a number between 1 and 4."
         }
     }
 }
 catch {
-    Write-Host "An error occurred: $_"
-}
-
-# Enable verbose output
-$VerbosePreference = 'Continue'
+    Write
