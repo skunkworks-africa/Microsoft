@@ -1,32 +1,34 @@
-# ProcessGuardian
+# burnt-exe
 
-ProcessGuardian is a PowerShell-based tool designed for system administrators and IT professionals. It offers management and investigation functionalities for system processes, focusing on remote access and potentially risky processes.
+Welcome to the `burnt-exe` repository, a collaborative and learning-focused space hosted by Microsoft Developer for Skunkworks. This repository is a hub for project files, historical records, and tools that foster collaboration and innovation.
 
-## Features
+## ProcessGuardian.ps1
 
-- Manage Remote Access Processes
-- Blacklist and Stop Processes
-- Log and Investigate Irregular Processes
-- Display Blacklisted Processes
-- Network Scan Integration (Conceptual)
+`ProcessGuardian.ps1` is a PowerShell script that aids in managing and investigating system processes. It's designed for IT professionals who require a tool to manage remote access processes, stop and blacklist processes, log activities, and list irregular processes for further investigation.
 
-## Prerequisites
+### Features
 
-- PowerShell
-- Nmap (for network scan feature)
-- Administrative Privileges
+- **Stop and Blacklist Processes**: Identify and stop potentially harmful processes, adding them to a blacklist for future reference.
+- **Kill Processes**: Forcefully terminate specified processes.
+- **List Irregular Processes**: List currently running processes that may require further investigation based on CPU and memory usage.
+- **Display Blacklisted Processes**: View a list of all processes that have been blacklisted.
 
-## Usage
+### Getting Started
 
-1. Open PowerShell as an administrator.
-2. Navigate to the script's directory.
-3. Execute the script: `.\ProcessGuardian.ps1`
-4. Choose an action from the presented options.
+Download the `ProcessGuardian.ps1` from the `.ps1/ProcessGuardian` directory. Ensure you have PowerShell installed and the necessary administrative privileges to execute the script. For usage details, refer to the manual section in the script.
 
-## Disclaimer
+## Collaboration and Contribution
 
-This tool is for experienced IT professionals. It should be used with caution, as it can disrupt system operations.
+We encourage collaboration and contributions to enhance the functionality of our tools and projects. If you have ideas, bug reports, or enhancements, please share them with us. Contributions should follow our guidelines and respect the repository's code of conduct.
+
+## Reporting Bugs
+
+Find a bug? Let us know! Submit bug reports to our [Issues page](#).
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+The code in this repository is available under the [MIT License](#). This permissive licensing allows for greater collaboration and use within the developer community.
+
+## Acknowledgments
+
+Thanks to all the contributors who make this repository a thriving place for learning and innovation. Let's continue to create something amazing!
