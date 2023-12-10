@@ -1,2 +1,3 @@
-# Microsoft Developer Repository for Skunkworks
-Welcome to Microsoft's private repository! Contains project files, history, and collaboration tools. Let's create something amazing!
+# burnt-exe
+
+Welcome to the `burnt-exe` repository, a collaborative and learning-focused space hosted by Microsoft Developer for Skunkworks. This repository is a hub for project files, historical
