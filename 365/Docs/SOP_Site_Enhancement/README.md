@@ -107,5 +107,4 @@
 - Access to SharePoint and Teams for screenshots and examples.
 - Collaboration with the IT team for technical accuracy.
 
-**Contact:** raydo@skunkworks.africa  
-**Phone:** +27 83 380 7950
+**Contact:** training@skunkworks.africa  
